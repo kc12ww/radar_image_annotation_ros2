@@ -1,0 +1,17 @@
+/back/radar_node:
+  ros__parameters:
+    bypassed: false
+    group_ip: 239.255.0.6
+    local_ip: 192.168.8.12
+    port: 6781
+    qos_overrides:
+      /parameter_events:
+        publisher:
+          depth: 1000
+          durability: volatile
+          history: keep_last
+          reliability: reliable
+    radar_id: 0
+    remote_ip: 192.168.8.27
+    output_type: object
+    use_sim_time: false

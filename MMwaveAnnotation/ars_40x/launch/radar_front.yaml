@@ -1,0 +1,17 @@
+/front/radar_node:
+  ros__parameters:
+    bypassed: false
+    group_ip: 239.255.0.6
+    local_ip: 10.0.8.12
+    port: 6780
+    qos_overrides:
+      /parameter_events:
+        publisher:
+          depth: 1000
+          durability: volatile
+          history: keep_last
+          reliability: reliable
+    radar_id: 0
+    remote_ip: 10.0.8.27
+    output_type: object
+    use_sim_time: false

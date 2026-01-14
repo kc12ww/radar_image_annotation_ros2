@@ -1,0 +1,68 @@
+cmake_minimum_required(VERSION 3.8)
+project(radar_annotation)
+
+# 设置C++标准
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_PREFIX_PATH "/usr/lib/x86_64-linux-gnu")
+
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+  set(CMAKE_BUILD_TYPE Release)
+endif()
+
+# 查找依赖
+find_package(Pangolin REQUIRED)
+find_package(Boost REQUIRED)
+find_package(OpenCV REQUIRED)
+find_package(Eigen3 REQUIRED)
+find_package(Qt5Widgets REQUIRED)
+find_package(PCL 1.12 REQUIRED)
+# find_package(YamlCpp REQUIRED) # 替代yaml-cpp
+
+# 包含头文件目录
+include_directories(
+  include
+  ${Pangolin_INCLUDE_DIRS}
+  ${PCL_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
+  ${EIGEN3_INCLUDE_DIRS}
+)
+
+# 链接库目录
+link_directories(${Pangolin_LIBRARY_DIRS})
+
+# 设置Qt自动生成moc文件
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+# 源文件
+add_executable(radar_annotation_annotation src/main.cpp)
+# add_executable(radar_annotation_annotation src/main_ros.cpp)
+
+# 链接库
+target_link_libraries(${PROJECT_NAME}_annotation
+  ${PCL_LIBRARIES}
+  ${OpenCV_LIBS}
+  Qt5::Widgets
+  ${Boost_LIBRARIES}
+  ${Pangolin_LIBRARIES}
+)
+
+# 安装规则
+install(TARGETS ${PROJECT_NAME}_annotation DESTINATION bin)
+
+install(
+  DIRECTORY config
+  DESTINATION share/${PROJECT_NAME}/
+)
+
+install(
+  DIRECTORY "include/"
+  DESTINATION include
+)
+
+install(FILES
+        plugin_description.xml
+        DESTINATION share/${PROJECT_NAME})
+
+

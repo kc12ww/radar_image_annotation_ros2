@@ -1,0 +1,19 @@
+# type: 0: cluster, 1: object
+bool type
+
+# index: 0: NoObj, 1: distance, 2: Azimuth, 3: VrelOncome, 4: VrelDepart, 5: RCS, 6: Lifetime, 7: Size, 8: ProbExists, 9: Y, 10: X, 11: VYRightLeft, 12: VXOncome, 13: VYLeftRight, 14: VXDepart
+int32 index
+
+# enable or disable this filter
+bool active
+
+# min value
+float64 min
+
+# max value
+float64 max
+
+---
+
+int32 retval
+string reason
