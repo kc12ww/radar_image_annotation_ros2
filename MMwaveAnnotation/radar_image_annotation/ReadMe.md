@@ -69,3 +69,11 @@
 
 # version 20250425
 - 解决标注前和标注后数据信息不一致的bug
+
+# version 20260114
+- 上传ROS2版本的标注代码
+- 处理ros的bag包，转换为单帧数据文件：修改/src/data_preprocess.cpp文件中74行左右的数据话题名称：
+-           攀枝花的bag包：topics_of_interest_ = {"/back/radar_objects","/iv_points_2","/hkcam2/image"};  // PanZhiHua
+-           旅顺的bag包：topics_of_interest_ = {"/front/radar_objects","/ls128_left/lslidar_point_cloud","/image/oak_front"};  // LvShun
+- 执行ros2 run radar_annotation radar_annotation_data_preprocess <input_file_dir> <output_dir><br/>
+- 使用旅顺数据集进行毫米波雷达点云投影到图像（ROS2版本）：修改config/params.yaml文件中的pcd_folder、file_name_annotationed变量为本地文件夹路径；修改/include/radar_tran_image.hpp文件中95行左右的代码，交换long和lat；
